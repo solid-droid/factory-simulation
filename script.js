@@ -1,6 +1,6 @@
 var scene = new THREE.Scene();
 scene.background = new THREE.Color( 0xcccccc );
-var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 10000000);
+var camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 10000000);
 renderer = new THREE.WebGLRenderer({
   alpha: true,
   antialias: true
@@ -27,9 +27,10 @@ renderer.shadowMapSoft = true; // Shadow
 renderer.shadowMap.type = THREE.PCFShadowMap; //Shadow
 document.body.appendChild(renderer.domElement);
 
+var domEvents	= new THREEx.DomEvents(camera, renderer.domElement)
 
-camera.position.x = 3800;
-camera.position.y = 6000;
+camera.position.x = 7000;
+camera.position.y = 7000;
 camera.position.z = 0;
 
 
@@ -52,8 +53,8 @@ const groundMAT = new THREE.MeshPhongMaterial( { color: 0xdcdcdc, flatShading: t
   // mesh.matrixAutoUpdate = false;
   scene.add( ground );
 
-  const material = new THREE.MeshPhongMaterial( { color: 'red', flatShading: true } );
-  const block1 = new THREE.Mesh( geometry, material );
+  const material1 = new THREE.MeshPhongMaterial( { color: 'red', flatShading: true } );
+  const block1 = new THREE.Mesh( geometry, material1 );
   block1.position.x = -3000;
   block1.position.y = 10;
   block1.position.z = 3800;
@@ -63,7 +64,8 @@ const groundMAT = new THREE.MeshPhongMaterial( { color: 0xdcdcdc, flatShading: t
   block1.updateMatrix();
   scene.add( block1 );
 
-  const block2 = new THREE.Mesh( geometry, material );
+  const material2 = new THREE.MeshPhongMaterial( { color: 'blue', flatShading: true } );
+  const block2 = new THREE.Mesh( geometry, material2 );
   block2.position.x = -3000;
   block2.position.y = 10;
   block2.position.z = -3000;
@@ -73,7 +75,8 @@ const groundMAT = new THREE.MeshPhongMaterial( { color: 0xdcdcdc, flatShading: t
   block2.updateMatrix();
   scene.add( block2 );
 
-  const block3 = new THREE.Mesh( geometry, material );
+  const material3 = new THREE.MeshPhongMaterial( { color: 'green', flatShading: true } );
+  const block3 = new THREE.Mesh( geometry, material3 );
   block3.position.x = 3800;
   block3.position.y = 10;
   block3.position.z = 3800;
@@ -83,7 +86,8 @@ const groundMAT = new THREE.MeshPhongMaterial( { color: 0xdcdcdc, flatShading: t
   block3.updateMatrix();
   scene.add( block3 );
 
-  const block4 = new THREE.Mesh( geometry, material );
+  const material4 = new THREE.MeshPhongMaterial( { color: 'yellow', flatShading: true } );
+  const block4 = new THREE.Mesh( geometry, material4 );
   block4.position.x = 3800;
   block4.position.y = 10;
   block4.position.z = -3000;
@@ -105,6 +109,15 @@ scene.add( ambientLight );
 
 //
 
+domEvents.addEventListener(block3, 'click', function(event){
+	console.log('green')
+}, false)
+
+domEvents.addEventListener(ground, 'click', function(event){
+	console.log('ground')
+}, false)
+
+
 // Render Loop
 function render() {
   requestAnimationFrame(render); 
@@ -122,9 +135,3 @@ function onWindowResize() {
 		camera.updateProjectionMatrix();
 		renderer.setSize( window.innerWidth, window.innerHeight );
 }
-
-
-//See Also:
-
-//https://threejs.org/docs/#Reference/Materials/Material
-//https://threejs.org/docs/#Reference/Textures/Texture
