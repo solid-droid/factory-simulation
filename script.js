@@ -1,6 +1,6 @@
 var scene = new THREE.Scene();
 scene.background = new THREE.Color( 0xcccccc );
-var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 10000);
+var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 10000000);
 renderer = new THREE.WebGLRenderer({
   alpha: true,
   antialias: true
@@ -28,45 +28,79 @@ renderer.shadowMap.type = THREE.PCFShadowMap; //Shadow
 document.body.appendChild(renderer.domElement);
 
 
-camera.position.x = 1041;
-camera.position.y = 300;
-camera.position.z = 1082;
-camera.rotation.x = -0.75;
-camera.rotation.y = 0.6;
-camera.rotation.z= 0.49;
+camera.position.x = 3800;
+camera.position.y = 6000;
+camera.position.z = 0;
+
 
 // world
 
 const geometry = new THREE.BoxGeometry( 1, 1, 1 );
 geometry.translate( 0, 0.5, 0 );
-const material = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true } );
 
-for ( let i = 0; i < 500; i ++ ) {
+const groundMAT = new THREE.MeshPhongMaterial( { color: 0xdcdcdc, flatShading: true } );
 
-  const mesh = new THREE.Mesh( geometry, material );
-  mesh.position.x = Math.random() * 1600 - 800;
-  mesh.position.y = 0;
-  mesh.position.z = Math.random() * 1600 - 800;
-  mesh.scale.x = 20;
-  mesh.scale.y = Math.random() * 80 + 10;
-  mesh.scale.z = 20;
-  mesh.updateMatrix();
-  mesh.matrixAutoUpdate = false;
-  scene.add( mesh );
 
-}
+  const ground = new THREE.Mesh( geometry, groundMAT );
+  ground.position.x = 400;
+  ground.position.y = 0;
+  ground.position.z = 400;
+  ground.scale.x = 7000;
+  ground.scale.y = 10;
+  ground.scale.z = 7000;
+  ground.updateMatrix();
+  // mesh.matrixAutoUpdate = false;
+  scene.add( ground );
+
+  const material = new THREE.MeshPhongMaterial( { color: 'red', flatShading: true } );
+  const block1 = new THREE.Mesh( geometry, material );
+  block1.position.x = -3000;
+  block1.position.y = 10;
+  block1.position.z = 3800;
+  block1.scale.x = 50;
+  block1.scale.y = 50;
+  block1.scale.z = 50;
+  block1.updateMatrix();
+  scene.add( block1 );
+
+  const block2 = new THREE.Mesh( geometry, material );
+  block2.position.x = -3000;
+  block2.position.y = 10;
+  block2.position.z = -3000;
+  block2.scale.x = 50;
+  block2.scale.y = 50;
+  block2.scale.z = 50;
+  block2.updateMatrix();
+  scene.add( block2 );
+
+  const block3 = new THREE.Mesh( geometry, material );
+  block3.position.x = 3800;
+  block3.position.y = 10;
+  block3.position.z = 3800;
+  block3.scale.x = 50;
+  block3.scale.y = 50;
+  block3.scale.z = 50;
+  block3.updateMatrix();
+  scene.add( block3 );
+
+  const block4 = new THREE.Mesh( geometry, material );
+  block4.position.x = 3800;
+  block4.position.y = 10;
+  block4.position.z = -3000;
+  block4.scale.x = 50;
+  block4.scale.y = 50;
+  block4.scale.z = 50;
+  block4.updateMatrix();
+  scene.add( block4 );
 
 // lights
 
 const dirLight1 = new THREE.DirectionalLight( 0xffffff );
-dirLight1.position.set( 10, 1, 1 );
+dirLight1.position.set( 5, 1, 1 );
 scene.add( dirLight1 );
 
-// const dirLight2 = new THREE.DirectionalLight( 0x002288 );
-// dirLight2.position.set( - 1, - 1, - 1 );
-// scene.add( dirLight2 );
 
-const ambientLight = new THREE.AmbientLight( 0x222222 );
+const ambientLight = new THREE.AmbientLight( 0x919191 );
 scene.add( ambientLight );
 
 //
