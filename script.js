@@ -1,5 +1,5 @@
 var scene = new THREE.Scene();
-scene.background = new THREE.Color( 0xcccccc );
+scene.background = new THREE.Color( 0xeeeeee );
 var camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 10000000);
 renderer = new THREE.WebGLRenderer({
   alpha: true,
@@ -29,8 +29,8 @@ document.body.appendChild(renderer.domElement);
 
 var domEvents	= new THREEx.DomEvents(camera, renderer.domElement)
 
-camera.position.x = 7000;
-camera.position.y = 7000;
+camera.position.x = 8000;
+camera.position.y = 5000;
 camera.position.z = 0;
 
 
