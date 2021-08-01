@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" >
 <head>
-  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Digital Factory</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">   
+  <link rel="stylesheet" href="lib/bvselect.css" />
   <link rel="stylesheet" href="./style.css">
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />  
 </head>
 <body>
 <div class="header">
@@ -13,11 +15,25 @@
         Digital Factory
     </div>
 </div>
+<div class="plantSelect">
+  <div id="plant"></div>
+</div>
 
-<script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.min.js'></script>
-<script src='./lib/orbit.js'></script>
-<script src='./lib/threex.domevents.js'></script>
-<script  src="./script.js"></script>
+
+  <div id="canvas"></div>
 
 </body>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.min.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
+
+<script src="lib/bvselect.js"></script>
+<script src='./lib/orbit.js'></script>
+<script src='./lib/threex.domevents.js'></script>
+
+<script  src="./js/components.js"></script>
+<script src="./js/map.js"></script>
+<script  src="./script.js"></script>
+
 </html>

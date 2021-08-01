@@ -1,3 +1,37 @@
+
+ 
+  var $select = $('#plant').selectize({
+      sortField: 'text',
+      create: false,
+      maxItems: 1,
+      delimiter: ',',
+      persist: false,
+  });
+  var plantSelect = $select[0].selectize;
+  if(window.innerWidth < 1024){
+    plantSelect.addOption([{
+            text: 'TC04A',
+            value: 1
+        },
+        {
+          text: 'EE01A',
+            value: 2
+        }]);
+} else {
+  plantSelect.addOption([{
+          text: 'Livonia Transmission Plant - TC04A',
+          value: 1
+      },
+      {
+        text: 'Advanced Manufacturing Center - EE01A',
+          value: 2
+      }]);
+}
+plantSelect.setValue(1);
+
+///////////////////////////////////////////////////////
+
+
 var scene = new THREE.Scene();
 scene.background = new THREE.Color( 0xeeeeee );
 var camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 10000000);
@@ -7,7 +41,7 @@ renderer = new THREE.WebGLRenderer({
 });
 var back = false;
 
-var controls = new THREE.OrbitControls( camera );
+var controls = new THREE.OrbitControls(camera, renderer.domElement);
 controls.mouseButtons = {
     ORBIT: THREE.MOUSE.RIGHT,
     ZOOM: THREE.MOUSE.MIDDLE,
@@ -25,7 +59,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.shadowMap.enabled = true; //Shadow
 renderer.shadowMapSoft = true; // Shadow
 renderer.shadowMap.type = THREE.PCFShadowMap; //Shadow
-document.body.appendChild(renderer.domElement);
+document.getElementById("canvas").appendChild(renderer.domElement);
 
 var domEvents	= new THREEx.DomEvents(camera, renderer.domElement)
 
@@ -36,66 +70,17 @@ camera.position.z = 0;
 
 // world
 
-const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-geometry.translate( 0, 0.5, 0 );
 
-const groundMAT = new THREE.MeshPhongMaterial( { color: 0xdcdcdc, flatShading: true } );
+// geometry.translate( 0, 0.5, 0 );
 
+createGround();
 
-  const ground = new THREE.Mesh( geometry, groundMAT );
-  ground.position.x = 400;
-  ground.position.y = 0;
-  ground.position.z = 400;
-  ground.scale.x = 7000;
-  ground.scale.y = 10;
-  ground.scale.z = 7000;
-  ground.updateMatrix();
-  // mesh.matrixAutoUpdate = false;
-  scene.add( ground );
+createCube(-3000,10,3800,50,'red');
+createCube(-3000,10,-3000,50,'blue');
+createCube(3800,10,3800,50, 'green');
+createCube(3800,10,-3000,50,'yellow');
 
-  const material1 = new THREE.MeshPhongMaterial( { color: 'red', flatShading: true } );
-  const block1 = new THREE.Mesh( geometry, material1 );
-  block1.position.x = -3000;
-  block1.position.y = 10;
-  block1.position.z = 3800;
-  block1.scale.x = 50;
-  block1.scale.y = 50;
-  block1.scale.z = 50;
-  block1.updateMatrix();
-  scene.add( block1 );
-
-  const material2 = new THREE.MeshPhongMaterial( { color: 'blue', flatShading: true } );
-  const block2 = new THREE.Mesh( geometry, material2 );
-  block2.position.x = -3000;
-  block2.position.y = 10;
-  block2.position.z = -3000;
-  block2.scale.x = 50;
-  block2.scale.y = 50;
-  block2.scale.z = 50;
-  block2.updateMatrix();
-  scene.add( block2 );
-
-  const material3 = new THREE.MeshPhongMaterial( { color: 'green', flatShading: true } );
-  const block3 = new THREE.Mesh( geometry, material3 );
-  block3.position.x = 3800;
-  block3.position.y = 10;
-  block3.position.z = 3800;
-  block3.scale.x = 50;
-  block3.scale.y = 50;
-  block3.scale.z = 50;
-  block3.updateMatrix();
-  scene.add( block3 );
-
-  const material4 = new THREE.MeshPhongMaterial( { color: 'yellow', flatShading: true } );
-  const block4 = new THREE.Mesh( geometry, material4 );
-  block4.position.x = 3800;
-  block4.position.y = 10;
-  block4.position.z = -3000;
-  block4.scale.x = 50;
-  block4.scale.y = 50;
-  block4.scale.z = 50;
-  block4.updateMatrix();
-  scene.add( block4 );
+loadComponents('TC04A');
 
 // lights
 
@@ -109,13 +94,7 @@ scene.add( ambientLight );
 
 //
 
-domEvents.addEventListener(block3, 'click', function(event){
-	console.log('green')
-}, false)
 
-domEvents.addEventListener(ground, 'click', function(event){
-	console.log('ground')
-}, false)
 
 
 // Render Loop
@@ -134,4 +113,25 @@ function onWindowResize() {
 	  camera.aspect = window.innerWidth / window.innerHeight;
 		camera.updateProjectionMatrix();
 		renderer.setSize( window.innerWidth, window.innerHeight );
+    plantSelect.clearOptions();
+    if(window.innerWidth < 1024){
+      plantSelect.addOption([{
+              text: 'TC04A',
+              value: 1
+          },
+          {
+            text: 'EE01A',
+              value: 2
+          }]);
+    } else {
+      plantSelect.addOption([{
+            text: 'Livonia Transmission Plant - TC04A',
+            value: 1
+        },
+        {
+          text: 'Advanced Manufacturing Center - EE01A',
+            value: 2
+        }]);
+    }
+    plantSelect.setValue(1);
 }
