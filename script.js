@@ -39,8 +39,6 @@ renderer = new THREE.WebGLRenderer({
   alpha: true,
   antialias: true
 });
-var back = false;
-
 var controls = new THREE.OrbitControls(camera, renderer.domElement);
 controls.mouseButtons = {
     ORBIT: THREE.MOUSE.RIGHT,

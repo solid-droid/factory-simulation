@@ -32,11 +32,17 @@ let ltp =
                                                     {
                                                         name : 'A',
                                                         hierarchyType : 'Station',
+                                                        device : 'Robot',
+                                                        from : 'TC04A/MC/0794/MODA/0080/01/G',
+                                                        to : 'TC04A/MC/0794/MODA/0080/01/G',
                                                         path: 'TC04A/MC/0794/MODA/0080/01/A',
                                                     },
                                                     {
                                                         name : 'G',
                                                         hierarchyType : 'Station',
+                                                        device : 'Gantry',
+                                                        from : 'TC04A/MC/0794/MODA/0070/01/G',
+                                                        to   : 'TC04A/MC/0794/MODA/0090/01/G',
                                                         path: 'TC04A/MC/0794/MODA/0080/01/G',
                                                     }
                                                 ]
@@ -49,6 +55,9 @@ let ltp =
                                                     {
                                                         name : 'A',
                                                         hierarchyType : 'Station',
+                                                        device : 'Robot',
+                                                        from : 'TC04A/MC/0794/MODA/0080/01/G',
+                                                        to : 'TC04A/MC/0794/MODA/0080/01/G',
                                                         path: 'TC04A/MC/0794/MODA/0080/02/A',
                                                     }
                                                 ]
@@ -61,6 +70,9 @@ let ltp =
                                                     {
                                                         name : 'A',
                                                         hierarchyType : 'Station',
+                                                        device : 'Robot',
+                                                        from : 'TC04A/MC/0794/MODA/0080/01/G',
+                                                        to : 'TC04A/MC/0794/MODA/0080/01/G',
                                                         path: 'TC04A/MC/0794/MODA/0080/03/A',
                                                     }
                                                 ]
@@ -73,6 +85,9 @@ let ltp =
                                                     {
                                                         name : 'A',
                                                         hierarchyType : 'Station',
+                                                        device : 'Robot',
+                                                        from : 'TC04A/MC/0794/MODA/0080/01/G',
+                                                        to : 'TC04A/MC/0794/MODA/0080/01/G',
                                                         path: 'TC04A/MC/0794/MODA/0080/04/A',
                                                     }
                                                 ]
@@ -85,6 +100,9 @@ let ltp =
                                                     {
                                                         name : 'A',
                                                         hierarchyType : 'Station',
+                                                        device : 'Robot',
+                                                        from : 'TC04A/MC/0794/MODA/0080/01/G',
+                                                        to : 'TC04A/MC/0794/MODA/0080/01/G',
                                                         path: 'TC04A/MC/0794/MODA/0080/05/A',
                                                     }
                                                 ]
@@ -97,6 +115,9 @@ let ltp =
                                                     {
                                                         name : 'A',
                                                         hierarchyType : 'Station',
+                                                        device : 'Robot',
+                                                        from : 'TC04A/MC/0794/MODA/0080/01/G',
+                                                        to : 'TC04A/MC/0794/MODA/0080/01/G',
                                                         path: 'TC04A/MC/0794/MODA/0080/06/A',
                                                     }
                                                 ]

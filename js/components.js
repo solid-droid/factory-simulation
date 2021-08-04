@@ -1,6 +1,6 @@
 let assets = [];
-let gantry = [];
 let tree = [];
+var components = [];
 
 const createGround = () => {
 
@@ -18,19 +18,34 @@ const createGround = () => {
 
 
 }
+const offset = {x : -3000 , y:10 , z:3800};
+const createCuboid = ({
+    l = 50 , w = 50 , h = 50,
+    color = 'red'
+    }) => {
+        const geometry = new THREE.BoxGeometry( l, h, w );
+        const material1 = new THREE.MeshPhongMaterial( { color , flatShading: true } );
+        const block = new THREE.Mesh( geometry, material1 );
+        block.position.x = offset.x;
+        block.position.y = offset.y;
+        block.position.z = offset.z;
+        scene.add( block );
+        return block;
+};
 
 const createCube = ( x = -3000 , y=10 , z=3800 , size = 50 , color = 'red' ) => {
 
     const geometry = new THREE.BoxGeometry( 1, 1, 1 );
     const material1 = new THREE.MeshPhongMaterial( { color , flatShading: true } );
-    const block1 = new THREE.Mesh( geometry, material1 );
-    block1.position.x = x;
-    block1.position.y = y;
-    block1.position.z = z;
-    block1.scale.x = size;
-    block1.scale.y = size;
-    block1.scale.z = size;
-    scene.add( block1 );
+    const block = new THREE.Mesh( geometry, material1 );
+    block.position.x = x;
+    block.position.y = y;
+    block.position.z = z;
+    block.scale.x = size;
+    block.scale.y = size;
+    block.scale.z = size;
+    scene.add( block);
+    return block;
 };
 
 const loadComponents = (plant)=>{
@@ -42,7 +57,9 @@ const loadComponents = (plant)=>{
 
 const loadLTP = () => {
     const getList = (data) => {
-        tree.push({name: data.name, type: data.hierarchyType, path: data.path});
+        let node = {...data}
+        delete node.children;
+        tree.push(node);
         if(data.children){
             data.children.forEach(node => {
                 getList(node);
@@ -51,5 +68,40 @@ const loadLTP = () => {
     };
 
     getList(ltp);
-    console.log(tree);
+    assets = tree.filter(x => x.hierarchyType == 'Station');
+    loadAssets();
 };
+
+const loadAssets = () => {
+
+   const gantry = assets.filter(x => x.device == 'Gantry');
+   const robot = assets.filter(x => x.device == 'Robot');
+   
+   ////////Build Gantry///////
+   loadGantry(gantry);
+   loadRobot(robot);
+
+}
+
+const loadGantry = (list) => {
+
+    list.forEach((x ,i) => {
+     let machine = {}
+     machine['path'] = x.path;
+     let gantry = {};
+     gantry ={w : 500 + i * 1000};
+     machine['block'] = createCuboid(gantry);
+     machine.block.translateZ(-(500 + i * 1000)/2);
+
+     components.push(machine);
+
+    });
+
+    console.log(components);
+
+};
+
+const loadRobot = (list) => {
+
+
+}
