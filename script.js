@@ -33,6 +33,9 @@ plantSelect.setValue(2);
 
 
 var scene = new THREE.Scene();
+var clock = new THREE.Clock();
+var robot1 , car;
+var mixers = [];
 scene.background = new THREE.Color( 0xeeeeee );
 var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100000);
 renderer = new THREE.WebGLRenderer({
@@ -48,7 +51,7 @@ controls.mouseButtons = {
     PAN: THREE.MOUSE.LEFT
   };
 controls.minDistance  =2000;
-controls.maxDistance  = 8500;
+controls.maxDistance  = 9000;
 controls.enableDamping = true; 
 controls.dampingFactor = 0.12;  
 controls.rotateSpeed = 0.08; 
@@ -81,7 +84,16 @@ createGround();
 // createCube(3800,30,3800,50, 'green');
 // createCube(3800,30,-3000,50,'yellow');
 
-loadComponents('EE01A');
+var loader = new THREE.GLTFLoader();
+loader.crossOrigin = true;
+loader.load( './3dModels/robot1/scene.gltf', gltf => {
+    robot1 = gltf;  
+loader.load( './3dModels/car1/scene.gltf', gltf => {
+      car = gltf;  
+      loadComponents('EE01A');
+ }); 
+}); 
+
 
 // lights
 
@@ -101,6 +113,8 @@ scene.add( ambientLight );
 // Render Loop
 function render() {
   requestAnimationFrame(render); 
+  var delta = clock.getDelta();
+  mixers.forEach(mixer => mixer.update( delta ));
   controls.update();
   renderer.render(scene, camera);
 }
