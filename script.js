@@ -27,25 +27,28 @@
           value: 2
       }]);
 }
-plantSelect.setValue(1);
+plantSelect.setValue(2);
 
 ///////////////////////////////////////////////////////
 
 
 var scene = new THREE.Scene();
 scene.background = new THREE.Color( 0xeeeeee );
-var camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 10000000);
+var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100000);
 renderer = new THREE.WebGLRenderer({
   alpha: true,
   antialias: true
 });
+const DPR = window.devicePixelRatio ? window.devicePixelRatio : 1;
+renderer.setPixelRatio(DPR);
 var controls = new THREE.OrbitControls(camera, renderer.domElement);
 controls.mouseButtons = {
     ORBIT: THREE.MOUSE.RIGHT,
     ZOOM: THREE.MOUSE.MIDDLE,
     PAN: THREE.MOUSE.LEFT
   };
-
+controls.minDistance  =2000;
+controls.maxDistance  = 8500;
 controls.enableDamping = true; 
 controls.dampingFactor = 0.12;  
 controls.rotateSpeed = 0.08; 
@@ -73,12 +76,12 @@ camera.position.z = 0;
 
 createGround();
 
-createCube(-3000,10,3800,50,'red');
-createCube(-3000,10,-3000,50,'blue');
-createCube(3800,10,3800,50, 'green');
-createCube(3800,10,-3000,50,'yellow');
+// createCube(-3000,30,3800,50,'red');
+// createCube(-3000,30,-3000,50,'blue');
+// createCube(3800,30,3800,50, 'green');
+// createCube(3800,30,-3000,50,'yellow');
 
-loadComponents('TC04A');
+loadComponents('EE01A');
 
 // lights
 
