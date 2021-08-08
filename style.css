@@ -61,6 +61,27 @@ body {
   }
 }
 
+#tooltip {
+  position: fixed;
+  border: solid 1px gray;
+  width: 200px;
+  height: 200px;
+  background-color: rgba(37, 37, 37, 0.781);
+  z-index: 3;
+  color: white;
+  display: none;
+  overflow: hidden;
+  padding: 2px;
+}
+
+#tooltip .name {
+  font-size: 20px;
+}
+
+#tooltip .path {
+  font-size: 13px;
+}
+
 @media only screen and (max-width: 600px) {
   .header {
     margin: 5px;

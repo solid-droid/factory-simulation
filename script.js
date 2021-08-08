@@ -37,7 +37,7 @@ var clock = new THREE.Clock();
 var robot1 , car;
 var mixers = [];
 scene.background = new THREE.Color( 0xeeeeee );
-var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100000);
+var camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 100000);
 renderer = new THREE.WebGLRenderer({
   alpha: true,
   antialias: true
@@ -51,7 +51,7 @@ controls.mouseButtons = {
     PAN: THREE.MOUSE.LEFT
   };
 controls.minDistance  =2000;
-controls.maxDistance  = 9000;
+controls.maxDistance  = 10000;
 controls.enableDamping = true; 
 controls.dampingFactor = 0.12;  
 controls.rotateSpeed = 0.08; 
@@ -67,15 +67,23 @@ document.getElementById("canvas").appendChild(renderer.domElement);
 
 var domEvents	= new THREEx.DomEvents(camera, renderer.domElement)
 
-camera.position.x = 8000;
-camera.position.y = 5000;
-camera.position.z = 0;
+// camera.position.x = 6500;
+// camera.position.y = 3000;
+// camera.position.z = 100;
+
+var camera_pivot = new THREE.Object3D()
+var Zaxis = new THREE.Vector3( 0, 0, 1 );
+var Yaxis = new THREE.Vector3( 0, 1, 0 );
+
+scene.add( camera_pivot );
+camera_pivot.add( camera );
+camera.lookAt( camera_pivot.position );
+camera_pivot.rotateOnAxis( Zaxis,0.05);
+camera_pivot.rotateOnAxis( Yaxis, 0.465);
+camera.position.set( 6000, 3000, 3000 );
 
 
 // world
-
-
-// geometry.translate( 0, 0.5, 0 );
 
 createGround();
 

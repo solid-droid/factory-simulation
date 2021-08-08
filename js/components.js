@@ -3,12 +3,12 @@ var components = [];
 
 const createGround = () => {
 
-    var geo = new THREE.PlaneBufferGeometry(7000, 7000);
+    var geo = new THREE.PlaneBufferGeometry(10000, 10000);
     var mat = new THREE.MeshBasicMaterial({ color: 0x8c8383, side: THREE.DoubleSide });
     var plane = new THREE.Mesh(geo, mat);
     plane.rotateX( - Math.PI / 2);
     plane.position.x = 400;
-    plane.position.z = 400;
+    plane.position.z = 0;
     plane.position.y = -30;
     scene.add(plane);
     
@@ -29,7 +29,7 @@ const createCuboid = ({
     l = 50 , w = 50 , h = 50,
     color = '#b6cfec' 
     }) => {
-        const offset = {x : -3000 , y:41 , z:3800};
+        const offset = {x : -3000 , y:41 , z:3400};
         const geometry = new THREE.BoxGeometry( l, h, w );
         const material = new THREE.MeshPhongMaterial( { color , flatShading: true } ); 
         const block = new THREE.Mesh( geometry, material);
@@ -42,7 +42,7 @@ const createCuboid = ({
 
 const createCube = ( x = 0 , y= 0 , z= 0 , size = 50 , color = 'red' ) => {
 
-    const offset = { x : -3000 , y:20 , z: -3800};
+    const offset = { x : -3000 , y:20 , z: -3400};
     const geometry = new THREE.BoxGeometry( 1, 1, 1 );
     const material = new THREE.MeshPhongMaterial( { color , flatShading: true } );
     const block = new THREE.Mesh( geometry, material );
@@ -182,7 +182,7 @@ const loadGantry = (list) => {
 };
 
 const createRobot = (model,x=0,y=0,z=0,rot=0) => {
-    model.scene.position.set(-3000+x, 40+y, 3000-z);
+    model.scene.position.set(-3000+x, 40+y, 2600-z);
     const size = 60;
     model.scene.scale.x = size;
     model.scene.scale.y = size;
@@ -296,6 +296,8 @@ const loadWorkStation = (list , Line) => {
     list.forEach(ws => {
         const currLine = ws.path.split('/')[3];
         const {block, edge} = createCuboid({l : workStationWidth * 2 , w  : workStationWidth , h : workStationWidth*3/2 , color :'blue'});
+        block.name = ws.name;
+        block['path'] = ws.path;
         if(prevLine !== currLine){
             prevLine = currLine;
             block.translateZ(-lineWidth * 2.65 * lineCounter - lineWidth);
@@ -307,6 +309,12 @@ const loadWorkStation = (list , Line) => {
         block.translateX(totalW/2);
         scene.add( block);
         block.add(edge);
+        domEvents.addEventListener(block, 'click', () => {
+            mouseClick(block);
+        }, false);
+        domEvents.addEventListener(block, 'mouseout', () => {
+            mouseOut(block);
+        }, false);
         }
     });
 
@@ -330,7 +338,7 @@ const createCar = (model,x=0,y=150,z=0,rot=0) => {
 
 const loadAMV = async line => {
     const lineWidth = totalW / (line.length*2 + 1);
-    const model = createCar(cloneGltf(car),totalW-70,150,-500);
+    const model = createCar(cloneGltf(car),totalW-70,150,-100);
 
     TweenMax.to( model.position, 3, {z : model.position.z - lineWidth, onComplete:()=> moveUp(model , lineWidth ,line.length , 1)});
     
